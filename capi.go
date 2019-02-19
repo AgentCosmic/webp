@@ -534,3 +534,21 @@ func webpDelXMP(data []byte) (newData []byte, err error) {
 	copy(newData, ((*[1 << 30]byte)(unsafe.Pointer(cptr)))[0:len(newData):len(newData)])
 	return
 }
+func webpDelMetadata(data []byte, format string) (newData []byte, err error) {
+	if len(data) == 0 {
+		err = errors.New("webpDelMetadata: bad arguments")
+		return
+	}
+
+	switch format {
+	case "EXIF":
+		return webpDelEXIF(data)
+	case "ICCP":
+		return webpDelICCP(data)
+	case "XMP":
+		return webpDelXMP(data)
+	default:
+		err = errors.New("webpDelMetadata: unknown format")
+		return
+	}
+}

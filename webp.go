@@ -148,3 +148,8 @@ func GetMetadata(data []byte, format string) (metadata []byte, err error) {
 func SetMetadata(data, metadata []byte, format string) (newData []byte, err error) {
 	return webpSetMetadata(data, metadata, format)
 }
+
+// DelMetadata del EXIF/ICCP/XMP format metadata.
+func DelMetadata(data []byte, format string) (newData []byte, err error) {
+	return webpDelMetadata(data, format)
+}
